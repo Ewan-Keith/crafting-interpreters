@@ -5,6 +5,7 @@
 #include "debug.h"
 #include "memory.h"
 #include "object.h"
+#include "table.h"
 #include "value.h"
 #include "vm.h"
 #include <stdarg.h>
@@ -31,8 +32,12 @@ static void runtimeError(const char *format, ...) {
 void initVm() {
   resetStack();
   vm.objects = NULL;
+  initTable(&vm.strings);
 }
-void freeVm() { freeObjects(); }
+void freeVm() {
+  freeTable(&vm.strings);
+  freeObjects();
+}
 
 void push(Value value) {
   *vm.stackTop = value;
