@@ -83,6 +83,7 @@ static void skipWhitespace() {
         // A comment goes until the end of the line
         while (peek() != '\n' && !isAtEnd())
           advance();
+        break;
       } else {
         return;
       }
